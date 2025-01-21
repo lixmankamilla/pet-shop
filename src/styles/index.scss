@@ -1,0 +1,144 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    padding: 1rem 2rem;
+  }
+  
+  .navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .navbar .links a {
+    margin-left: 1rem;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  
+  .navbar .links a:hover {
+    text-decoration: underline;
+  }
+  
+  .homepage, .product-page, .cart-page, .contact-page {
+    padding: 2rem;
+  }
+  
+  .controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .controls input, .controls select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+  
+  .product-card {
+    background: white;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .product-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+  
+  button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .cart-page ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .cart-page li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    background: white;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .cart-page img {
+    max-width: 100px;
+    margin-right: 1rem;
+  }
+  
+  .cart-page button {
+    margin-left: auto;
+  }
+  
+  .contact-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+  }
+  
+  .contact-page form div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contact-page form label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .contact-page form input, .contact-page form textarea {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .contact-page button {
+    align-self: flex-start;
+  }
+  
+  .contact-info {
+    margin-top: 2rem;
+  }
+  
+  .contact-info h2 {
+    margin-bottom: 1rem;
+  }
+  
