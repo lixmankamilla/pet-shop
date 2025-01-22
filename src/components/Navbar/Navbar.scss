@@ -5,22 +5,59 @@
   background-color: #007bff;
   color: white;
   padding: 1rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar__logo-image {
+  width: 120px;
+  height: 120px;
+}
+
+.navbar__title {
   font-size: 1.5rem;
   font-weight: bold;
   color: white;
   text-decoration: none;
 }
 
-.navbar__links a {
-  margin-left: 1rem;
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navbar__link {
   color: white;
   text-decoration: none;
   font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar__link:hover {
+  color: #ffdd57;
 }
 
 .navbar__cart {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
   font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.navbar__cart-icon {
+  margin-right: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.navbar__cart:hover {
+  color: #ffdd57;
 }
