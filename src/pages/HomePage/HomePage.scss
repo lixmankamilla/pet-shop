@@ -1,56 +1,74 @@
 .homepage {
   padding: 2rem;
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
 }
 
 .homepage__title {
-  font-size: 2rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #007bff;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .homepage__controls {
   display: flex;
+  justify-content: center;
   gap: 1rem;
   margin-bottom: 2rem;
 }
 
-.homepage__search,
 .homepage__sort,
 .homepage__filter {
-  padding: 0.5rem;
+  padding: 0.75rem;
   font-size: 1rem;
   border: 1px solid #ddd;
   border-radius: 5px;
+  width: 200px;
 }
 
 .homepage__section-title {
   margin-top: 2rem;
   margin-bottom: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
+  font-weight: bold;
+  text-align: center;
 }
 
 .homepage__recommended-list,
 .homepage__product-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 0 2rem;
 }
 
 .homepage__product-card {
   background: white;
-  padding: 1rem;
+  padding: 1.5rem;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.homepage__product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
 .homepage__product-image {
   max-width: 100%;
   height: auto;
   margin-bottom: 1rem;
+  border-radius: 5px;
 }
 
 .homepage__product-name {
   font-size: 1.25rem;
+  font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
@@ -58,13 +76,156 @@
   color: #007bff;
   font-weight: bold;
   margin-bottom: 1rem;
+  font-size: 1.125rem;
+}
+
+.homepage__add-to-cart {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.homepage__add-to-cart:hover {
+  background-color: #0056b3;
 }
 
 .homepage__product-link {
-  color: #0056b3;
+  color: #555;
   text-decoration: none;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  display: inline-block;
+  transition: color 0.3s ease;
 }
 
 .homepage__product-link:hover {
-  text-decoration: underline;
+  color: #007bff;
+}
+
+.homepage__carousel-title {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.homepage__carousel-description {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.3rem 0.8rem;
+  border-radius: 5px;
+  color: #f0f0f0;
+}
+
+.homepage__features {
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem 0;
+  padding: 1rem 0;
+  background-color: #f8f9fa;
+}
+
+.homepage__feature {
+  text-align: center;
+  max-width: 200px;
+}
+
+.homepage__feature img {
+  width: 50px;
+  margin-bottom: 1rem;
+}
+
+.homepage__product-card {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.homepage__product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.homepage__add-to-cart {
+  background: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.homepage__add-to-cart:hover {
+  background-color: #0056b3;
+}
+
+.custom-arrow {
+  font-size: 1rem;
+  padding: 30px;
+  width: 200px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-control-prev .custom-arrow {
+  left: 25px;
+}
+
+.carousel-control-next .custom-arrow {
+  right: 25px;
+}
+
+.homepage__categories {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.homepage__category-circle {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid red;
+  border-radius: 50%;
+  padding: 1rem;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s;
+}
+
+.homepage__category-circle:hover {
+  transform: scale(1.1);
+}
+
+.homepage__category-circle img {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 0.5rem;
+}
+
+.homepage__category-circle h3 {
+  font-size: 1rem;
+  color: #333;
+}
+
+.homepage__section-title {
+  color: red;
 }

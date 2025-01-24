@@ -7,8 +7,14 @@ const CartPage = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
 
-  const handleRemove = (id) => {
+  const handleRemoveFromCart = (id) => {
     dispatch(removeFromCart(id));
+    const updatedCart = cartItems.filter((item) => item.id !== id);
+    if (updatedCart.length > 0) {
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+    } else {
+      localStorage.removeItem("cart");
+    }
   };
 
   const totalPrice = cartItems
@@ -36,7 +42,7 @@ const CartPage = () => {
                   <p>Quantity: {item.quantity}</p>
                   <button
                     className="cart-page__remove"
-                    onClick={() => handleRemove(item.id)}
+                    onClick={() => handleRemoveFromCart(item.id)}
                   >
                     Remove
                   </button>
