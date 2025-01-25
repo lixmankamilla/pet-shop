@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import slide1 from "../../assets/slide1.png";
 import slide2 from "../../assets/slide2.png";
@@ -11,6 +11,7 @@ import spotlight5 from "../../assets/spotlight5.png";
 import spotlight6 from "../../assets/spotlight6.png";
 import { Link, useNavigate } from "react-router-dom";
 import { addToCart, initializeCart } from "../../store/cartSlice";
+import { addToFavorites } from "../../store/favoritesSlice";
 import "./HomePage.scss";
 import Carousel from "react-bootstrap/Carousel";
 
@@ -19,6 +20,8 @@ const HomePage = () => {
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart.items);
   const products = useSelector((state) => state.products.items);
+  const [index, setIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const categories = [
     {
       image: spotlight1,
@@ -29,15 +32,9 @@ const HomePage = () => {
       category: "Lily's Kitchen",
     },
     {
-      image: spotlight3,
-      category: "Thunder Paws",
-    },
-    {
       image: spotlight4,
       category: "Taste of the Wild",
     },
-    { image: spotlight5, category: "Orijen" },
-    { image: spotlight6, category: "Applaws" },
   ];
 
   const customerReviews = [
@@ -83,6 +80,27 @@ const HomePage = () => {
     },
   ];
 
+  const productsPerPage = 4;
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(products.length / productsPerPage)) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
+
   const handleCategoryClick = (category) => {
     navigate(`/category/${category}`);
   };
@@ -90,6 +108,27 @@ const HomePage = () => {
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
   };
+
+  const handleSelect = (selectedIndex) => {
+    setIndex(selectedIndex);
+  };
+
+  const handleAddToFavorites = (product) => {
+    dispatch(addToFavorites(product));
+    const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    if (!savedFavorites.find((item) => item.id === product.id)) {
+      savedFavorites.push(product);
+      localStorage.setItem("favorites", JSON.stringify(savedFavorites));
+    }
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % customerReviews.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [customerReviews.length]);
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
@@ -151,55 +190,89 @@ const HomePage = () => {
 
       <h2 className="homepage__section-title">Recommended Products</h2>
       <div className="homepage__recommended-list">
-        {products.slice(0, 3).map((product) => (
+        {currentProducts.map((product) => (
           <div key={product.id} className="homepage__product-card">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="homepage__product-image"
-            />
+            <div className="homepage__image-wrapper">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="homepage__product-image"
+              />
+            </div>
             <h2 className="homepage__product-name">{product.name}</h2>
             <p className="homepage__product-price">${product.price}</p>
-            <button
-              className="homepage__add-to-cart"
-              onClick={() => handleAddToCart(product)}
-            >
-              Add to Cart
-            </button>
-            <Link
-              to={`/product/${product.id}`}
-              className="homepage__product-link"
-            >
-              View Details
-            </Link>
+            <div className="homepage__buttons">
+              <button
+                className="homepage__add-to-cart"
+                onClick={() => handleAddToCart(product)}
+              >
+                Add to Cart
+              </button>
+              <button
+                className="homepage__add-to-favorites"
+                onClick={() => handleAddToFavorites(product)}
+              >
+                ❤️
+              </button>
+              <Link
+                to={`/product/${product.id}`}
+                className="homepage__view-details"
+              >
+                View Details
+              </Link>
+            </div>
           </div>
         ))}
       </div>
+      <div className="homepage__pagination">
+        <button
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+          className="homepage__pagination-button"
+        >
+          Previous
+        </button>
+        <span className="homepage__pagination-info">
+          Page {currentPage} of {Math.ceil(products.length / productsPerPage)}
+        </span>
+        <button
+          onClick={handleNextPage}
+          disabled={
+            currentPage === Math.ceil(products.length / productsPerPage)
+          }
+          className="homepage__pagination-button"
+        >
+          Next
+        </button>
+      </div>
+
       <div className="homepage__reviews">
         <h2 className="homepage__reviews-title">What Our Customers Say</h2>
         <Carousel
-          indicators={false} /* Убираем полоски */
-          nextIcon={
-            <span className="custom-arrow custom-arrow-next">
-              <i className="fas fa-chevron-right"></i>
-            </span>
-          }
-          prevIcon={
-            <span className="custom-arrow custom-arrow-prev">
-              <i className="fas fa-chevron-left"></i>
-            </span>
-          }
+          activeIndex={index}
+          onSelect={handleSelect}
+          indicators={false}
+          controls={false}
         >
-          {customerReviews.map((review, index) => (
-            <Carousel.Item key={index} className="homepage__review-item">
-              <p className="homepage__review-text">"{review.text}"</p>
-              <span className="homepage__review-author">
-                {Array.from({ length: review.rating }).map((_, i) => (
-                  <i key={i} className="fas fa-star homepage__review-star"></i>
-                ))}
-                <br />
-                {review.author}
-              </span>
+          {customerReviews.map((review, i) => (
+            <Carousel.Item key={i} className="homepage__review-item">
+              <div
+                onClick={() =>
+                  handleSelect((index + 1) % customerReviews.length)
+                }
+              >
+                <p className="homepage__review-text">"{review.text}"</p>
+                <span className="homepage__review-author">
+                  {Array.from({ length: review.rating }).map((_, j) => (
+                    <i
+                      key={j}
+                      className="fas fa-star homepage__review-star"
+                    ></i>
+                  ))}
+                  <br />
+                  {review.author}
+                </span>
+              </div>
             </Carousel.Item>
           ))}
         </Carousel>

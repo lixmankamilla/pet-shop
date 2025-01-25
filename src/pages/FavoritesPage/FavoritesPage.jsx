@@ -8,6 +8,8 @@ const FavoritesPage = () => {
   const dispatch = useDispatch();
 
   const handleRemove = (id) => {
+    const updatedFavorites = favorites.filter((item) => item.id !== id);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     dispatch(removeFromFavorites(id));
   };
 

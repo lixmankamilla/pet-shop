@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import productsReducer from "./productsSlice";
 import cartReducer from "./cartSlice";
-import favoritesReducer from "./favoritesSlice";
+import favoritesReducer, { initializeFavorites } from "./favoritesSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,5 +10,8 @@ const store = configureStore({
     favorites: favoritesReducer,
   },
 });
+
+const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+store.dispatch(initializeFavorites(savedFavorites));
 
 export default store;
