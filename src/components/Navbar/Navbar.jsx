@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { initializeFavorites } from "../../store/favoritesSlice";
 import { FaShoppingCart } from "react-icons/fa";
 import logo from "../../assets/logo.png";
 import "./Navbar.scss";
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const cartItems = useSelector((state) => state.cart.items);
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const dispatch = useDispatch();
@@ -16,8 +16,17 @@ const Navbar = () => {
     .toFixed(2);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleSearch = (e) => {
+  const navigate = useNavigate();
+
+  const handleSearchInputChange = (e) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    if (e.key === "Enter" && searchTerm.trim() !== "") {
+      navigate(`/search?query=${searchTerm.trim()}`);
+      setSearchTerm("");
+    }
   };
 
   useEffect(() => {
@@ -32,6 +41,17 @@ const Navbar = () => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
+  const handleLoginLogout = () => {
+    if (isLoggedIn) {
+      localStorage.removeItem("isLoggedIn");
+      setIsLoggedIn(false);
+      alert("You have been logged out.");
+      navigate("/");
+    } else {
+      navigate("/signin");
+    }
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar__logo">
@@ -40,15 +60,16 @@ const Navbar = () => {
           Pet Shop
         </Link>
       </div>
-      <div className="navbar__search">
+      <form onSubmit={handleSearchSubmit} className="navbar__search">
         <input
           type="text"
           className="navbar__search-input"
           placeholder="Search for products..."
           value={searchTerm}
-          onChange={handleSearch}
+          onChange={handleSearchInputChange}
+          onKeyDown={handleSearchSubmit}
         />
-      </div>
+      </form>
       <div className="navbar__links">
         <Link to="/" className="navbar__link">
           Home
@@ -67,6 +88,26 @@ const Navbar = () => {
             )}
           </div>
         </Link>
+        <div className="navbar__auth-buttons">
+          {!isLoggedIn && (
+            <>
+              <button
+                className="navbar__button navbar__button--signup"
+                onClick={() => navigate("/signup")}
+              >
+                Sign Up
+              </button>
+            </>
+          )}
+          {isLoggedIn && (
+            <button
+              className="navbar__button navbar__button--logout"
+              onClick={handleLoginLogout}
+            >
+              Logout
+            </button>
+          )}
+        </div>
       </div>
     </nav>
   );

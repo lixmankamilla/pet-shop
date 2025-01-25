@@ -20,6 +20,18 @@ const initialState = {
       price: 20,
       category: "dog",
       image: recomended1,
+      shortDescription:
+        "Grain-free formula with fish protein for sensitive dogs.",
+      details: [
+        "High-quality fish protein.",
+        "Supports sensitive digestion.",
+        "Rich in omega fatty acids for healthy skin and coat.",
+      ],
+      specs: {
+        Weight: "12kg",
+        Ingredients: "Fish Protein, Sweet Potatoes, Peas",
+        SuitableFor: "Adult dogs",
+      },
     },
     {
       id: 2,
@@ -27,6 +39,18 @@ const initialState = {
       price: 15,
       category: "dog",
       image: recomended2,
+      shortDescription:
+        "A wholesome recipe made with natural ingredients for adult dogs.",
+      details: [
+        "Freshly prepared chicken and duck.",
+        "Grain-free formula.",
+        "Packed with sweet potatoes for natural energy.",
+      ],
+      specs: {
+        Weight: "7kg",
+        Ingredients: "Chicken, Duck, Sweet Potatoes",
+        SuitableFor: "Adult dogs",
+      },
     },
     {
       id: 3,
@@ -34,6 +58,17 @@ const initialState = {
       price: 50,
       category: "dog",
       image: recomended3,
+      shortDescription: "Tailored nutrition for adult Golden Retrievers.",
+      details: [
+        "Supports skin and coat health.",
+        "Promotes cardiac health.",
+        "Exclusive kibble design for dental care.",
+      ],
+      specs: {
+        Weight: "12kg",
+        Ingredients: "Chicken Meal, Rice, Omega-3",
+        SuitableFor: "Adult Golden Retrievers",
+      },
     },
     {
       id: 4,
@@ -41,6 +76,18 @@ const initialState = {
       price: 50,
       category: "dog",
       image: recomended4,
+      shortDescription:
+        "Limited-ingredient diet with Angus Beef as the primary protein.",
+      details: [
+        "High digestibility with limited ingredients.",
+        "Rich in omega fatty acids.",
+        "Supports overall health and well-being.",
+      ],
+      specs: {
+        Weight: "11.3kg",
+        Ingredients: "Angus Beef, Lentils, Sunflower Oil",
+        SuitableFor: "Dogs with sensitivities",
+      },
     },
     {
       id: 5,
@@ -48,6 +95,17 @@ const initialState = {
       price: 50,
       category: "cat",
       image: recomended5,
+      shortDescription: "Nutritional support for growing kittens.",
+      details: [
+        "Provides immune support with antioxidants.",
+        "Small, easy-to-chew kibble.",
+        "Balanced nutrients for healthy growth.",
+      ],
+      specs: {
+        Weight: "10kg",
+        Ingredients: "Chicken Meal, Fish Oil, Antioxidants",
+        SuitableFor: "Kittens up to 12 months",
+      },
     },
     {
       id: 6,
@@ -55,6 +113,17 @@ const initialState = {
       price: 50,
       category: "dog",
       image: recomended6,
+      shortDescription: "Fun and durable plush toy for dogs.",
+      details: [
+        "Soft and safe material.",
+        "Includes squeaker for extra fun.",
+        "Perfect for medium-sized dogs.",
+      ],
+      specs: {
+        Dimensions: "25x15x7cm",
+        Material: "Plush",
+        SuitableFor: "All dogs",
+      },
     },
     {
       id: 7,
@@ -62,6 +131,17 @@ const initialState = {
       price: 50,
       category: "dog",
       image: recomended7,
+      shortDescription: "A squeaky toy with a unique bunny-saurus design.",
+      details: [
+        "Large size for bigger dogs.",
+        "Durable construction for long-lasting play.",
+        "Fun squeaker for engagement.",
+      ],
+      specs: {
+        Dimensions: "45cm",
+        Material: "Plush",
+        SuitableFor: "Large dogs",
+      },
     },
     {
       id: 8,
@@ -69,6 +149,17 @@ const initialState = {
       price: 50,
       category: "dog",
       image: recomended8,
+      shortDescription: "Durable tie-shaped toy for interactive play.",
+      details: [
+        "Perfect for tug-of-war games.",
+        "Lightweight and easy to carry.",
+        "Suitable for medium to large dogs.",
+      ],
+      specs: {
+        Dimensions: "23x11.5x2.3cm",
+        Material: "Rubber",
+        SuitableFor: "Medium and large dogs",
+      },
     },
     {
       id: 9,
@@ -76,6 +167,17 @@ const initialState = {
       price: 50,
       category: "small pets",
       image: recomended9,
+      shortDescription: "Spacious cage for small rodents with multiple levels.",
+      details: [
+        "Provides ample space for activity.",
+        "Includes ramps and platforms for enrichment.",
+        "Easy to clean and maintain.",
+      ],
+      specs: {
+        Dimensions: "40.5x27x41cm",
+        SuitableFor: "Small rodents",
+        Material: "Metal and plastic",
+      },
     },
     {
       id: 10,
@@ -83,13 +185,35 @@ const initialState = {
       price: 50,
       category: "small pets",
       image: recomended10,
+      shortDescription: "High-quality hay for small pets.",
+      details: [
+        "Rich in fiber for digestive health.",
+        "Fresh and aromatic for palatability.",
+        "Suitable for daily feeding.",
+      ],
+      specs: {
+        Weight: "1kg",
+        SuitableFor: "Rabbits, Guinea Pigs, Hamsters",
+        Ingredients: "Natural hay",
+      },
     },
     {
       id: 11,
       name: "Padovan Wellness Mix Seeds Parrot Food",
       price: 50,
       category: "bird",
-      image: recomended11,
+      image:recomended11,
+      shortDescription: "A nutritious mix of seeds for parrots.",
+      details: [
+        "Fortified with essential vitamins.",
+        "Includes a variety of seeds for balanced nutrition.",
+        "Promotes vibrant feathers and health.",
+      ],
+      specs: {
+        Weight: "2kg",
+        SuitableFor: "Parrots",
+        Ingredients: "Seeds, Vitamins, Minerals",
+      },
     },
     {
       id: 12,
@@ -97,6 +221,17 @@ const initialState = {
       price: 50,
       category: "bird",
       image: recomended12,
+      shortDescription: "Sunflower seeds for all types of birds.",
+      details: [
+        "High-quality, cleaned sunflower seeds.",
+        "Rich in energy and natural oils.",
+        "Ideal for daily feeding.",
+      ],
+      specs: {
+        Weight: "2kg",
+        SuitableFor: "All birds",
+        Ingredients: "Sunflower seeds",
+      },
     },
   ],
 };

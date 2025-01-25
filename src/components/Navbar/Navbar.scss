@@ -128,3 +128,24 @@
 .navbar__favorites:hover {
   color: rgb(138, 42, 42);
 }
+
+.navbar__auth-button {
+  margin-left: 20px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #5a6268;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  }
+}
