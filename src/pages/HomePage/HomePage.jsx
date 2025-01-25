@@ -40,6 +40,49 @@ const HomePage = () => {
     { image: spotlight6, category: "Applaws" },
   ];
 
+  const customerReviews = [
+    {
+      text: "Great products and fast delivery! My dog loves it!",
+      author: "John Doe",
+      rating: 5,
+    },
+    {
+      text: "Excellent customer service and quality items.",
+      author: "Jane Smith",
+      rating: 4,
+    },
+    {
+      text: "Affordable prices and a wide selection. Highly recommend!",
+      author: "Mike Johnson",
+      rating: 5,
+    },
+    {
+      text: "The quality of the toys is outstanding, and my cat can't stop playing with them!",
+      author: "Sarah Brown",
+      rating: 5,
+    },
+    {
+      text: "Fast shipping and excellent packaging. Will definitely order again!",
+      author: "Emily White",
+      rating: 5,
+    },
+    {
+      text: "Customer support was very helpful in finding the right products for my bird.",
+      author: "Robert Green",
+      rating: 4,
+    },
+    {
+      text: "The treats are amazing! My dog is always excited when I order from here.",
+      author: "Olivia Black",
+      rating: 5,
+    },
+    {
+      text: "Wide variety of options for all pets. Prices are also very reasonable.",
+      author: "William Blue",
+      rating: 4,
+    },
+  ];
+
   const handleCategoryClick = (category) => {
     navigate(`/category/${category}`);
   };
@@ -72,16 +115,14 @@ const HomePage = () => {
         className="homepage__carousel"
         indicators={false}
         nextIcon={
-          <span
-            className="carousel-control-next-icon custom-arrow"
-            aria-hidden="true"
-          />
+          <span className="custom-arrow custom-arrow-next">
+            <i className="fas fa-chevron-right"></i>
+          </span>
         }
         prevIcon={
-          <span
-            className="carousel-control-prev-icon custom-arrow"
-            aria-hidden="true"
-          />
+          <span className="custom-arrow custom-arrow-prev">
+            <i className="fas fa-chevron-left"></i>
+          </span>
         }
       >
         <Carousel.Item>
@@ -133,6 +174,35 @@ const HomePage = () => {
             </Link>
           </div>
         ))}
+      </div>
+      <div className="homepage__reviews">
+        <h2 className="homepage__reviews-title">What Our Customers Say</h2>
+        <Carousel
+          indicators={false} /* Убираем полоски */
+          nextIcon={
+            <span className="custom-arrow custom-arrow-next">
+              <i className="fas fa-chevron-right"></i>
+            </span>
+          }
+          prevIcon={
+            <span className="custom-arrow custom-arrow-prev">
+              <i className="fas fa-chevron-left"></i>
+            </span>
+          }
+        >
+          {customerReviews.map((review, index) => (
+            <Carousel.Item key={index} className="homepage__review-item">
+              <p className="homepage__review-text">"{review.text}"</p>
+              <span className="homepage__review-author">
+                {Array.from({ length: review.rating }).map((_, i) => (
+                  <i key={i} className="fas fa-star homepage__review-star"></i>
+                ))}
+                <br />
+                {review.author}
+              </span>
+            </Carousel.Item>
+          ))}
+        </Carousel>
       </div>
     </div>
   );
