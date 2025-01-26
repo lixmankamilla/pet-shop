@@ -5,13 +5,11 @@ import slide2 from "../../assets/slide2.png";
 import slide3 from "../../assets/slide3.png";
 import spotlight1 from "../../assets/spotlight1.png";
 import spotlight2 from "../../assets/spotlight2.png";
-import spotlight3 from "../../assets/spotlight3.png";
 import spotlight4 from "../../assets/spotlight4.png";
-import spotlight5 from "../../assets/spotlight5.png";
-import spotlight6 from "../../assets/spotlight6.png";
 import { Link, useNavigate } from "react-router-dom";
 import { addToCart, initializeCart } from "../../store/cartSlice";
 import { addToFavorites } from "../../store/favoritesSlice";
+import CategoryBar from "../../components/CategoryBar/CategoryBar";
 import "./HomePage.scss";
 import Carousel from "react-bootstrap/Carousel";
 
@@ -19,7 +17,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart.items);
-  const products = useSelector((state) => state.products.items);
+  const recommendedProducts = useSelector((state) => state.products.items);
   const [index, setIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const categories = [
@@ -84,13 +82,13 @@ const HomePage = () => {
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(
+  const currentProducts = recommendedProducts.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
 
   const handleNextPage = () => {
-    if (currentPage < Math.ceil(products.length / productsPerPage)) {
+    if (currentPage < Math.ceil(recommendedProducts.length / productsPerPage)) {
       setCurrentPage((prevPage) => prevPage + 1);
     }
   };
@@ -148,8 +146,23 @@ const HomePage = () => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const handleCategorySelect = (category) => {
+    if (selectedCategory === category) {
+      setSelectedCategory(null);
+    } else {
+      setSelectedCategory(category);
+      navigate(`/animal-category/${category.toLowerCase()}`);
+    }
+  };
+
   return (
     <div className="homepage">
+      <CategoryBar
+        selectedCategory={selectedCategory}
+        onCategorySelect={handleCategorySelect}
+      />
       <Carousel
         className="homepage__carousel"
         indicators={false}
@@ -175,7 +188,7 @@ const HomePage = () => {
         </Carousel.Item>
       </Carousel>
 
-      <h2 className="homepage__section-title">In The Spotlight</h2>
+      <h2 className="homepage__section-title">Our Brands</h2>
       <div className="homepage__categories">
         {categories.map((category) => (
           <div
@@ -233,12 +246,14 @@ const HomePage = () => {
           Previous
         </button>
         <span className="homepage__pagination-info">
-          Page {currentPage} of {Math.ceil(products.length / productsPerPage)}
+          Page {currentPage} of{" "}
+          {Math.ceil(recommendedProducts.length / productsPerPage)}
         </span>
         <button
           onClick={handleNextPage}
           disabled={
-            currentPage === Math.ceil(products.length / productsPerPage)
+            currentPage ===
+            Math.ceil(recommendedProducts.length / productsPerPage)
           }
           className="homepage__pagination-button"
         >

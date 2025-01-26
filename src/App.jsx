@@ -7,6 +7,7 @@ import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import Navbar from "./components/Navbar/Navbar";
 import SearchResults from "./pages/SearchResultsPage/SearchResult";
 import FavoritesPage from "./pages/FavoritesPage/FavoritesPage";
+import CategoryAnimalPage from "./pages/CategoryAnimalPage/CategoryAnimalPage";
 import Footer from "../src/components/Footer/Footer";
 import SignIn from "./pages/SignInPage/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
@@ -29,6 +30,10 @@ const App = () => {
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/category/:category" element={<CategoryPage />} />
+          <Route
+            path="/animal-category/:category"
+            element={<CategoryAnimalPage />}
+          />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/search" element={<SearchResults />} />
           <Route
